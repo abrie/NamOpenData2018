@@ -106,12 +106,7 @@ function normalizeByRegion(input, index) {
     return region_array[index];
   });
 
-  const sum = unnormal.reduce( (a,b) => a+b, 0 ); 
-  const normalized = unnormal.map( (a) => a / sum );
-  const largest = normalized.reduce( (a,b) => a > b ? a : b, normalized[0]);
-  const scaled = normalized.map( (a) => a * 1/largest );
-
-  return scaled;
+  return normalizeArray(unnormal);
 }
 
 function scoreRegionsByDayOfWeek(index) {
