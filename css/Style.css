@@ -1,0 +1,10 @@
+canvas{
+    float: left;
+    width: 50%;
+}
+
+days {
+    float: right;
+    width: 50%;
+    text-decoration: none;
+}
