@@ -45,6 +45,32 @@ function scoreRegionsByDayOfWeek(index) {
   return scaled;
 }
 
+function scoreRegionsByVehicleType(index) {
+  const unnormal = vehicle_type_by_region.map( (region_vehicle) => {
+    return region_vehicle[index];
+  });
+
+  const sum = unnormal.reduce( (a,b) => a+b, 0 ); 
+  const normalized = unnormal.map( (a) => a / sum );
+  const largest = normalized.reduce( (a,b) => a > b ? a : b, normalized[0]);
+  const scaled = normalized.map( (a) => a * 1/largest );
+
+  return scaled;
+}
+
+function scoreRegionsByAccidentType(index) {
+  const unnormal = accident_type_by_region.map( (region_target) => {
+    return region_target[index];
+  });
+
+  const sum = unnormal.reduce( (a,b) => a+b, 0 ); 
+  const normalized = unnormal.map( (a) => a / sum );
+  const largest = normalized.reduce( (a,b) => a > b ? a : b, normalized[0]);
+  const scaled = normalized.map( (a) => a * 1/largest );
+
+  return scaled;
+}
+
 function scaledCrashesByHour() {
   const sum = number_of_crashes_by_hour_of_day.reduce( (a,b) => a+b, 0 ); 
   const normalized = number_of_crashes_by_hour_of_day.map( (a) => a / sum );
@@ -64,7 +90,7 @@ function scaledInjuriesByMonth() {
   return scaled;
 }
 
-const crash_targets = [
+const accident_types = [
   "Cyclist", 
   "Tyre-Burst",
   "Animal collisions",
@@ -76,7 +102,7 @@ const crash_targets = [
   "Others",
   "Grand Total"];
 
-const crashed_with_target_by_region = [
+const accident_type_by_region = [
   [10,1,37,17,9,4,3,81],
   [21,4,6,108,182,116,17,8,16,478],
   [6,3,13,19,99,23,6,2,5,176],

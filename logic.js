@@ -6,6 +6,7 @@ const state = {
   age: undefined,
   driving: undefined,
   vehicle_type: undefined,
+  accident_type: undefined,
 }
 
 var canvas = document.getElementById("map");
@@ -14,15 +15,28 @@ var regionImages = loadImages();
 
 function recompute() {
   var regionScores = scoreRegionsByDayOfWeek(state.day);
+  var regionVehicleScores = scoreRegionsByVehicleType(state.vehicle);
+  var regionAccidentTypeScores = scoreRegionsByAccidentType(state.accident_type);
 
   let scaledHours = scaledCrashesByHour();
   let hourScale = scaledHours[state.hour] * 0.2;
 
   let scaledMonths = scaledInjuriesByMonth();
   let monthScale = scaledMonths[state.month] * 0.4;
-  var sr = regionScores.map( score => Math.min(1, hourScale+monthScale+score) )
+
+  function scoreFunction(base, idx) {
+    return Math.min(1, 
+      base +
+      hourScale + 
+      monthScale +
+      regionVehicleScores[idx] + 
+      regionAccidentTypeScores[idx])
+  }
+
+  let sr = regionScores.map( (score, idx) => scoreFunction(score, idx) ) 
 
   drawMap();
+
   sr.forEach( (score, idx) => drawRegion(idx, score) );
 }
 
@@ -57,10 +71,10 @@ function drawRegion(idx, alpha) {
   context.drawImage(regionImages[regionName], 0, 0);
 }
 
-function createOption(str) {
+function createOption(idx, str) {
   var el = document.createElement("option");
   el.innerHTML = str;
-  el.setAttribute("value", str);
+  el.setAttribute("value", idx);
   return el;
 }
 
@@ -68,12 +82,11 @@ function updateState() {
   state.hour = hourSelector.value;
   state.day = daySelector.value;
   state.month = monthSelector.value;
+  state.vehicle = parseInt(vehicleSelector.value);
+  state.accident_type = parseInt(accidentTypeSelector.value);
 
   recompute();
 }
-
-const crashTargetSelector = document.getElementById("crash-target-selector");
-crashTargetSelector.addEventListener("change", (evt) => console.log(evt.target.value));
 
 const hourSelector = document.getElementById("hour-selector");
 hourSelector.addEventListener("input", updateState );
@@ -84,11 +97,21 @@ daySelector.addEventListener("input", updateState );
 const monthSelector = document.getElementById("month-selector");
 monthSelector.addEventListener("input", updateState );
 
-populateVehicleTypeSelector( document.getElementById("vehicle-selector") );
+const vehicleSelector = document.getElementById("vehicle-selector");
+populateVehicleTypeSelector( vehicleSelector );
+vehicleSelector.addEventListener("change", updateState);
 populateAgeSelector( document.getElementById("age-selector") );
 
+const accidentTypeSelector = document.getElementById("accident-selector");
+populateAccidentTypeSelector(accidentTypeSelector);
+accidentTypeSelector.addEventListener("change", updateState);
+
 function populateVehicleTypeSelector(element) {
-  vehicle_types.forEach( function(str) { element.appendChild(createOption(str)) } );
+  vehicle_types.forEach( function(str, idx) { element.appendChild(createOption(idx, str)) } );
+}
+
+function populateAccidentTypeSelector(element) {
+  accident_types.forEach( function(str, idx) { element.appendChild(createOption(idx, str)) } );
 }
 
 function populateAgeSelector( el ) {
