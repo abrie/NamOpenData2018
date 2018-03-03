@@ -14,8 +14,12 @@ const regions = [
   "otjozondjupa",
 ]
 
-const number_of_injured_persons_per_month_per_year = [589,417,534,588,628,568,667,592,535,477,411,789,6795];
-const number_of_crashes_by_hour_of_day = [223, 120, 129, 319, 254, 278, 365, 440, 582, 571, 433, 313, 78];
+const number_of_injured_persons_per_month_per_year = 
+  [589,417,534,588,628,568,667,592,535,477,411,789,6795];
+
+const number_of_crashes_by_hour_of_day = 
+  [223, 120, 129, 319, 254, 278, 365, 440, 582, 571, 433, 313, 78];
+
 const number_of_crashes_per_day_of_week_by_region = [
   [11, 14, 13, 7, 3, 14, 19,81],
   [84, 55, 51, 52, 53, 78, 105,478],
@@ -30,65 +34,7 @@ const number_of_crashes_per_day_of_week_by_region = [
   [63, 32, 38, 40, 47, 69, 75,364],
   [32, 35, 25, 31, 28, 35, 54,240],
   [68, 49, 48, 41, 57, 61, 69,393],
-]
-
-function scoreRegionsByDayOfWeek(index) {
-  const unnormal = number_of_crashes_per_day_of_week_by_region.map( (region_week) => {
-    return region_week[index];
-  });
-
-  const sum = unnormal.reduce( (a,b) => a+b, 0 ); 
-  const normalized = unnormal.map( (a) => a / sum );
-  const largest = normalized.reduce( (a,b) => a > b ? a : b, normalized[0]);
-  const scaled = normalized.map( (a) => a * 1/largest );
-
-  return scaled;
-}
-
-function scoreRegionsByVehicleType(index) {
-  const unnormal = vehicle_type_by_region.map( (region_vehicle) => {
-    return region_vehicle[index];
-  });
-
-  const sum = unnormal.reduce( (a,b) => a+b, 0 ); 
-  const normalized = unnormal.map( (a) => a / sum );
-  const largest = normalized.reduce( (a,b) => a > b ? a : b, normalized[0]);
-  const scaled = normalized.map( (a) => a * 1/largest );
-
-  return scaled;
-}
-
-function scoreRegionsByAccidentType(index) {
-  const unnormal = accident_type_by_region.map( (region_target) => {
-    return region_target[index];
-  });
-
-  const sum = unnormal.reduce( (a,b) => a+b, 0 ); 
-  const normalized = unnormal.map( (a) => a / sum );
-  const largest = normalized.reduce( (a,b) => a > b ? a : b, normalized[0]);
-  const scaled = normalized.map( (a) => a * 1/largest );
-
-  return scaled;
-}
-
-function scaledCrashesByHour() {
-  const sum = number_of_crashes_by_hour_of_day.reduce( (a,b) => a+b, 0 ); 
-  const normalized = number_of_crashes_by_hour_of_day.map( (a) => a / sum );
-  const largest = normalized.reduce( (a,b) => a > b ? a : b, normalized[0]);
-  const scaled = normalized.map( (a) => a * 1/largest );
-
-  return scaled;
-}
-
-
-function scaledInjuriesByMonth() {
-  const sum = number_of_injured_persons_per_month_per_year.reduce( (a,b) => a+b, 0 ); 
-  const normalized = number_of_injured_persons_per_month_per_year.map( (a) => a / sum );
-  const largest = normalized.reduce( (a,b) => a > b ? a : b, normalized[0]);
-  const scaled = normalized.map( (a) => a * 1/largest );
-
-  return scaled;
-}
+];
 
 const accident_types = [
   "Cyclist", 
@@ -100,7 +46,8 @@ const accident_types = [
   "Fixed objects collisions",
   "Fell/Jumped from moving vehicle",
   "Others",
-  "Grand Total"];
+  "Grand Total"
+];
 
 const accident_type_by_region = [
   [10,1,37,17,9,4,3,81],
@@ -116,7 +63,7 @@ const accident_type_by_region = [
   [9,1,6,119,79,115,14,8,13,364],
   [2,17,39,96,61,8,4,13,240],
   [7,10,42,49,192,72,8,1,12,393],
-  ];
+];
 
 const vehicle_types = [
   "Bus", 
@@ -145,4 +92,44 @@ const vehicle_type_by_region = [
   [16 ,5 ,198 ,233 ,12 ,1 ,15 ,20 ,2 ,502],
   [15 ,0,149 ,101 ,10 ,3 ,23 ,6 ,3 ,310],
   [32 ,4 ,170 ,201 ,13 ,3 ,42 ,24 ,1 ,490],
-]
+];
+
+function normalizeArray(arr) {
+  const sum = arr.reduce( (a,b) => a+b, 0 ); 
+  const normalized = arr.map( (a) => a / sum );
+  const largest = normalized.reduce( (a,b) => a > b ? a : b, normalized[0]);
+  return normalized.map( (a) => a * 1/largest );
+}
+
+function normalizeByRegion(input, index) {
+  const unnormal = input.map( (region_array) => {
+    return region_array[index];
+  });
+
+  const sum = unnormal.reduce( (a,b) => a+b, 0 ); 
+  const normalized = unnormal.map( (a) => a / sum );
+  const largest = normalized.reduce( (a,b) => a > b ? a : b, normalized[0]);
+  const scaled = normalized.map( (a) => a * 1/largest );
+
+  return scaled;
+}
+
+function scoreRegionsByDayOfWeek(index) {
+  return normalizeByRegion(number_of_crashes_per_day_of_week_by_region, index)
+}
+
+function scoreRegionsByVehicleType(index) {
+  return normalizeByRegion(vehicle_type_by_region, index)
+}
+
+function scoreRegionsByAccidentType(index) {
+  return normalizeByRegion(accident_type_by_region, index)
+}
+
+function scaledCrashesByHour() {
+  return normalizeArray(number_of_crashes_by_hour_of_day);
+}
+
+function scaledInjuriesByMonth() {
+  return normalizeArray(number_of_injured_persons_per_month_per_year);
+}
