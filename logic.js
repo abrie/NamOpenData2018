@@ -11,15 +11,15 @@ const state = {
 var canvas = document.getElementById("map");
 var context = canvas.getContext('2d');
 var regionImages = loadImages();
-drawMap();
 
 function recompute() {
   var regionScores = scoreRegionsByDayOfWeek(state.day);
-  drawMap();
 
   let scaledHours = scaledCrashesByHour();
   let hourScale = scaledHours[state.hour] * 0.2;
   var sr = regionScores.map( score => Math.min(1, hourScale+score) )
+
+  drawMap();
   sr.forEach( (score, idx) => drawRegion(idx, score) );
 }
 
@@ -61,17 +61,25 @@ function createOption(str) {
   return el;
 }
 
+function updateState() {
+  state.hour = hourSelector.value;
+  state.day = daySelector.value;
+  state.month = monthSelector.value;
+
+  recompute();
+}
+
 const crashTargetSelector = document.getElementById("crash-target-selector");
 crashTargetSelector.addEventListener("change", (evt) => console.log(evt.target.value));
 
 const hourSelector = document.getElementById("hour-selector");
-hourSelector.addEventListener("input", (evt) => { state.hour = evt.target.value; recompute(); });
+hourSelector.addEventListener("input", updateState );
 
 const daySelector = document.getElementById("day-selector");
-daySelector.addEventListener("input", (evt) => { state.day = evt.target.value; recompute(); });
+daySelector.addEventListener("input", updateState );
 
 const monthSelector = document.getElementById("month-selector");
-monthSelector.addEventListener("input", (evt) => state.month = evt.target.value);
+monthSelector.addEventListener("input", updateState );
 
 populateVehicleTypeSelector( document.getElementById("vehicle-selector") );
 populateAgeSelector( document.getElementById("age-selector") );
@@ -88,4 +96,6 @@ function populateAgeSelector( el ) {
     el.appendChild(op);
   });
 }
+
+updateState();
 
