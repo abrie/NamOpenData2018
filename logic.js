@@ -8,6 +8,10 @@ const state = {
   vehicle_type: undefined,
 }
 
+function recompute() {
+  console.log(scoreRegionsByDayOfWeek(state.day));
+}
+
 function createOption(str) {
   var el = document.createElement("option");
   el.innerHTML = str;
@@ -22,7 +26,7 @@ const hourSelector = document.getElementById("hour-selector");
 hourSelector.addEventListener("input", (evt) => state.hour = evt.target.value);
 
 const daySelector = document.getElementById("day-selector");
-daySelector.addEventListener("input", (evt) => state.day = evt.target.value);
+daySelector.addEventListener("input", (evt) => { state.day = evt.target.value; recompute(); });
 
 const monthSelector = document.getElementById("month-selector");
 monthSelector.addEventListener("input", (evt) => state.month = evt.target.value);

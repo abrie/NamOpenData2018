@@ -30,8 +30,19 @@ const number_of_crashes_per_day_of_week_by_region = [
   [63, 32, 38, 40, 47, 69, 75,364],
   [32, 35, 25, 31, 28, 35, 54,240],
   [68, 49, 48, 41, 57, 61, 69,393],
-  [684, 493, 455, 468 ,508, 670, 856,4134],
 ]
+
+function scoreRegionsByDayOfWeek(index) {
+  const unnormal = number_of_crashes_per_day_of_week_by_region.map( (region_week) => {
+    return region_week[index];
+  });
+
+  const sum = unnormal.reduce( (a,b) => a+b, 0 ); 
+  const normalized = unnormal.map( (a) => a / sum );
+  const largest = normalized.reduce( (a,b) => a > b ? a : b, normalized[0]);
+  const scaled = normalized.map( (a) => a * 1/largest );
+  return scaled;
+}
 
 const crash_targets = [
   "Cyclist", 
