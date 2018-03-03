@@ -17,7 +17,10 @@ function recompute() {
 
   let scaledHours = scaledCrashesByHour();
   let hourScale = scaledHours[state.hour] * 0.2;
-  var sr = regionScores.map( score => Math.min(1, hourScale+score) )
+
+  let scaledMonths = scaledInjuriesByMonth();
+  let monthScale = scaledMonths[state.month] * 0.4;
+  var sr = regionScores.map( score => Math.min(1, hourScale+monthScale+score) )
 
   drawMap();
   sr.forEach( (score, idx) => drawRegion(idx, score) );

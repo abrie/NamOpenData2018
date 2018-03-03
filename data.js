@@ -54,6 +54,16 @@ function scaledCrashesByHour() {
   return scaled;
 }
 
+
+function scaledInjuriesByMonth() {
+  const sum = number_of_injured_persons_per_month_per_year.reduce( (a,b) => a+b, 0 ); 
+  const normalized = number_of_injured_persons_per_month_per_year.map( (a) => a / sum );
+  const largest = normalized.reduce( (a,b) => a > b ? a : b, normalized[0]);
+  const scaled = normalized.map( (a) => a * 1/largest );
+
+  return scaled;
+}
+
 const crash_targets = [
   "Cyclist", 
   "Tyre-Burst",
