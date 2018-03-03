@@ -1,17 +1,17 @@
 const regions = [
-  "Zambezi",
-  "Erongo",
-  "Hardap",
-  "//Karas",
-  "Kavango (East & West)",
-  "Khomas",
-  "Kunene",
-  "Ohangwena",
-  "Omaheke",
-  "Omusati",
-  "Oshana",
-  "Oshikoto",
-  "Otjozondjupa",
+  "caprivi",
+  "erongo",
+  "hardap",
+  "karas",
+  "kavango",
+  "khomas",
+  "kunene",
+  "ohangwena",
+  "omaheke",
+  "omusati",
+  "oshana",
+  "oshikoto",
+  "otjozondjupa",
 ]
 
 const number_of_injured_persons_per_month_per_year = [589,417,534,588,628,568,667,592,535,477,411,789,6795];
@@ -41,6 +41,7 @@ function scoreRegionsByDayOfWeek(index) {
   const normalized = unnormal.map( (a) => a / sum );
   const largest = normalized.reduce( (a,b) => a > b ? a : b, normalized[0]);
   const scaled = normalized.map( (a) => a * 1/largest );
+
   return scaled;
 }
 
@@ -94,7 +95,7 @@ const vehicle_type_by_region = [
   [93 ,46 ,467 ,1350 ,86 ,9 ,105 ,197 ,1 ,2354],
   [3 ,1 ,53 ,19 ,3 ,1 ,6 ,6 ,0,92],
   [4 ,2 ,78 ,99 ,4 ,0,5 ,7 ,1 ,200],
-  [2 ,1 ,48 ,28 ,2 ,0,2 ,8 ,"",91],
+  [2 ,1 ,48 ,28 ,2 ,0,2 ,8 ,0,91],
   [2 ,1 ,142 ,61 ,2 ,0,3 ,2 ,4 ,217],
   [16 ,5 ,198 ,233 ,12 ,1 ,15 ,20 ,2 ,502],
   [15 ,0,149 ,101 ,10 ,3 ,23 ,6 ,3 ,310],

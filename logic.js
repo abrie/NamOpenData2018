@@ -8,8 +8,45 @@ const state = {
   vehicle_type: undefined,
 }
 
+var canvas = document.getElementById("map");
+var context = canvas.getContext('2d');
+var regionImages = loadImages();
+drawMap();
+
 function recompute() {
-  console.log(scoreRegionsByDayOfWeek(state.day));
+  var regionScores = scoreRegionsByDayOfWeek(state.day);
+  drawMap();
+  regionScores.forEach( (score, idx) => drawRegion(idx, score) );
+}
+
+function loadImages() {
+  var regionImages = {};
+  regionImages["caprivi"] = document.getElementById("map-caprivi");
+  regionImages["hardap"] = document.getElementById("map-hardap");
+  regionImages["kavango"] = document.getElementById("map-kavango");
+  regionImages["kunene"] = document.getElementById("map-kunene");
+  regionImages["ohangwena"] = document.getElementById("map-ohangwena");
+  regionImages["omusati"] = document.getElementById("map-omusati");
+  regionImages["oshikoto"] = document.getElementById("map-oshikoto");
+  regionImages["erongo"] = document.getElementById("map-erongo");
+  regionImages["karas"] = document.getElementById("map-karas");
+  regionImages["khomas"] = document.getElementById("map-khomas");
+  regionImages["omaheke"] = document.getElementById("map-omaheke");
+  regionImages["oshana"] = document.getElementById("map-oshana");
+  regionImages["otjozondjupa"] = document.getElementById("map-otjozondjupa");
+
+  return regionImages;
+}
+
+function drawMap(region) {
+  let background = document.getElementById("map-background");
+  context.drawImage(background, 0, 0);
+}
+
+function drawRegion(idx, alpha) {
+  let regionName = regions[idx];
+  context.globalAlpha = alpha;
+  context.drawImage(regionImages[regionName], 0, 0);
 }
 
 function createOption(str) {
