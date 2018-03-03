@@ -45,6 +45,15 @@ function scoreRegionsByDayOfWeek(index) {
   return scaled;
 }
 
+function scaledCrashesByHour() {
+  const sum = number_of_crashes_by_hour_of_day.reduce( (a,b) => a+b, 0 ); 
+  const normalized = number_of_crashes_by_hour_of_day.map( (a) => a / sum );
+  const largest = normalized.reduce( (a,b) => a > b ? a : b, normalized[0]);
+  const scaled = normalized.map( (a) => a * 1/largest );
+
+  return scaled;
+}
+
 const crash_targets = [
   "Cyclist", 
   "Tyre-Burst",
