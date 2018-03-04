@@ -66,8 +66,8 @@ function drawState() {
   const dayLabel = day_labels[state.day];
   const monthLabel = month_labels[state.month];
   
-  const stateElement = document.getElementById("state");
-  stateElement.innerHTML = `${hourLabel} ${dayLabel} ${monthLabel}`
+  const hourElement = document.getElementById("displayed-hour");
+  hourElement.innerHTML = `${hourLabel}`;
 
 }
 
