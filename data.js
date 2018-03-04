@@ -94,37 +94,37 @@ const vehicle_type_by_region = [
   [32 ,4 ,170 ,201 ,13 ,3 ,42 ,24 ,1 ,490],
 ];
 
-function normalizeArray(arr) {
+function normalizeArray(arr, max) {
   const sum = arr.reduce( (a,b) => a+b, 0 ); 
   const normalized = arr.map( (a) => a / sum );
   const largest = normalized.reduce( (a,b) => a > b ? a : b, normalized[0]);
-  return normalized.map( (a) => a * 1/largest );
+  return normalized.map( (a) => a * max/largest );
 }
 
-function normalizeByRegion(input, index) {
+function normalizeByRegion(input, index, max_score) {
   const unnormal = input.map( (region_array) => {
     return region_array[index];
   });
 
-  return normalizeArray(unnormal);
+  return normalizeArray(unnormal, max_score);
 }
 
-function scoreRegionsByDayOfWeek(index) {
-  return normalizeByRegion(number_of_crashes_per_day_of_week_by_region, index)
+function scoreRegionsByDayOfWeek(week_index, max_score) {
+  return normalizeByRegion(number_of_crashes_per_day_of_week_by_region, week_index, max_score);
 }
 
-function scoreRegionsByVehicleType(index) {
-  return normalizeByRegion(vehicle_type_by_region, index)
+function scoreRegionsByVehicleType(vehicle_index, max_score) {
+  return normalizeByRegion(vehicle_type_by_region, vehicle_index, max_score);
 }
 
-function scoreRegionsByAccidentType(index) {
-  return normalizeByRegion(accident_type_by_region, index)
+function scoreRegionsByAccidentType(type_index, max_score) {
+  return normalizeByRegion(accident_type_by_region, type_index, max_score);
 }
 
-function scaledCrashesByHour() {
-  return normalizeArray(number_of_crashes_by_hour_of_day);
+function scaledCrashesByHour(max_score) {
+  return normalizeArray(number_of_crashes_by_hour_of_day, max_score);
 }
 
-function scaledInjuriesByMonth() {
-  return normalizeArray(number_of_injured_persons_per_month_per_year);
+function scaledInjuriesByMonth(max_score) {
+  return normalizeArray(number_of_injured_persons_per_month_per_year, max_score);
 }
