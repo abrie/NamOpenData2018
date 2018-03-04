@@ -30,10 +30,17 @@ body {
 }
 
 #state {
+  flex: 1 1 100%;
   margin: 0.25em;
   display: flex;
   flex-direction: row;
   border: 1px solid black;
+}
+
+#state div {
+  text-align: center;
+  vertical-align: center;
+  line-height: 100%;
 }
 
 #controls {
@@ -69,10 +76,6 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   align-content: space-between;
-}
-
-#state {
-  flex: 1 1 100%;
 }
 
 #days {
