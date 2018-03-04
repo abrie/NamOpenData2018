@@ -60,9 +60,21 @@ function loadImages() {
   return regionImages;
 }
 
+
 function drawState() {
-  const stateElement = document.getElementById("state");
-  stateElement.innerHTML = state.hour;
+  const hourLabel = hour_labels[state.hour];
+  const dayLabel = day_labels[state.day];
+  const monthLabel = month_labels[state.month];
+  
+  const hourElement = document.getElementById("displayed-hour");
+  hourElement.innerHTML = `${hourLabel}`;
+
+  const dayElement = document.getElementById("displayed-day");
+  dayElement.innerHTML = `${dayLabel}`;
+
+  const monthElement = document.getElementById("displayed-month");
+  monthElement.innerHTML = `${monthLabel}`;
+
 }
 
 function drawMap(region) {
