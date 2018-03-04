@@ -35,12 +35,10 @@ function recompute() {
 
   let sr = regionTypeScores.map( (score, idx) => scoreFunction(score, idx) ) 
 
-  //drawMap();
   clearMap();
   drawRoads();
   drawTowns();
   drawState();
-  
 
   sr.forEach( (score, idx) => drawRegion(idx, score) );
 }
@@ -210,4 +208,6 @@ function populateAgeSelector( el ) {
   });
 }
 
-updateState();
+window.onload = function() {
+  updateState();
+}
