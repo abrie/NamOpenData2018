@@ -60,9 +60,15 @@ function loadImages() {
   return regionImages;
 }
 
+
 function drawState() {
+  const hourLabel = hour_labels[state.hour];
+  const dayLabel = day_labels[state.day];
+  const monthLabel = month_labels[state.month];
+  
   const stateElement = document.getElementById("state");
-  stateElement.innerHTML = state.hour;
+  stateElement.innerHTML = `${hourLabel} ${dayLabel} ${monthLabel}`
+
 }
 
 function drawMap(region) {
