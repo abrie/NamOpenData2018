@@ -193,16 +193,3 @@ function populateAgeSelector( el ) {
 }
 
 updateState();
-
-// highlights the days of the week
-daySelector.addEventListener("change",changeDay);
-var past = 0;
-
-function changeDay()
-{
-   
- document.getElementById(`${daySelector.value}`).style.color = "red";
- document.getElementById(`${past}`).style.color = "black";
- past = daySelector.value;
-}
-//highlights the days of the  week
