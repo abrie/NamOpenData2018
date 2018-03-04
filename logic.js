@@ -84,9 +84,21 @@ function createOption(idx, str) {
   return el;
 }
 
-var totalElapsed = 0;
+var lastTime = 0;
 
-function onFrame(elapsed) {
+function onFrame(timestamp) {
+  const delta = timestamp - lastTime;
+
+  if (delta >= 500) {
+    lastTime = timestamp;
+    incrementStateTime();
+  }
+
+  state.frameRequest = undefined;
+  updateState();
+}
+
+function incrementStateTime() {
   let hour = state.hour;
   let day = state.day;
   let month = state.month;
@@ -107,10 +119,6 @@ function onFrame(elapsed) {
   hourSelector.value = hour;
   daySelector.value = day;
   monthSelector.value = month;
-
-  state.frameRequest = undefined;
-
-  updateState();
 }
 
 function requestFrame() {
