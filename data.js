@@ -45,8 +45,6 @@ const accident_types = [
   "Collisions",
   "Fixed objects collisions",
   "Fell/Jumped from moving vehicle",
-  "Others",
-  "Grand Total"
 ];
 
 const accident_type_by_region = [
