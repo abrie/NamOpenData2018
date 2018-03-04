@@ -4,12 +4,9 @@ const state = {
   month: undefined,
   gender: undefined,
   age: undefined,
-  driving: undefined,
   vehicle_type: undefined,
   accident_type: undefined,
 }
-
-
 
 var canvas = document.getElementById("map");
 var context = canvas.getContext('2d');
