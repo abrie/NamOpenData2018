@@ -2,14 +2,48 @@ body {
   border-box: border;
 }
 
+#displayed-hour {
+  flex: 1 1 33%;
+  font-size: 2em;
+}
+
+#displayed-day {
+  flex: 1 1 33%;
+  font-variant: small-caps;
+  font-size: 1.5em;
+}
+
+#displayed-month {
+  flex: 1 1 33%;
+  font-variant: small-caps;
+  font-size: 1.5em;
+}
+
 #container {
   display: flex;
   flex-flow: column;
   align-items: center;
 }
 
+#state {
+  display: flex;
+  flex-flow: row;
+  border: 1px solid black;
+}
+
 #controls {
-  flex: 0 0 50px;
+  display: flex;
+  flex: 1 1 100px;
+  flex-flow: row;
+  border: 1px solid black;
+}
+
+#controls div.control-group {
+  flex: 1 1 50%;
+} 
+
+#controls div.control-group div.control div.label {
+  display: inline;
 }
 
 #map {

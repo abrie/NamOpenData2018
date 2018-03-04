@@ -36,6 +36,7 @@ function recompute() {
   let sr = regionTypeScores.map( (score, idx) => scoreFunction(score, idx) ) 
 
   drawMap();
+  drawState();
 
   sr.forEach( (score, idx) => drawRegion(idx, score) );
 }
@@ -59,6 +60,23 @@ function loadImages() {
   return regionImages;
 }
 
+
+function drawState() {
+  const hourLabel = hour_labels[state.hour];
+  const dayLabel = day_labels[state.day];
+  const monthLabel = month_labels[state.month];
+  
+  const hourElement = document.getElementById("displayed-hour");
+  hourElement.innerHTML = `${hourLabel}`;
+
+  const dayElement = document.getElementById("displayed-day");
+  dayElement.innerHTML = `${dayLabel}`;
+
+  const monthElement = document.getElementById("displayed-month");
+  monthElement.innerHTML = `${monthLabel}`;
+
+}
+
 function drawMap(region) {
   let background = document.getElementById("map-background");
   context.globalAlpha = 1;
@@ -78,9 +96,21 @@ function createOption(idx, str) {
   return el;
 }
 
-var totalElapsed = 0;
+var lastTime = 0;
 
-function onFrame(elapsed) {
+function onFrame(timestamp) {
+  const delta = timestamp - lastTime;
+
+  if (delta >= 500) {
+    lastTime = timestamp;
+    incrementStateTime();
+  }
+
+  state.frameRequest = undefined;
+  updateState();
+}
+
+function incrementStateTime() {
   let hour = state.hour;
   let day = state.day;
   let month = state.month;
@@ -101,10 +131,6 @@ function onFrame(elapsed) {
   hourSelector.value = hour;
   daySelector.value = day;
   monthSelector.value = month;
-
-  state.frameRequest = undefined;
-
-  updateState();
 }
 
 function requestFrame() {
@@ -167,16 +193,3 @@ function populateAgeSelector( el ) {
 }
 
 updateState();
-
-// highlights the days of the week
-daySelector.addEventListener("change",changeDay);
-var past = 0;
-
-function changeDay()
-{
-   
- document.getElementById(`${daySelector.value}`).style.color = "red";
- document.getElementById(`${past}`).style.color = "black";
- past = daySelector.value;
-}
-//highlights the days of the  week

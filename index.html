@@ -6,16 +6,37 @@
   <body>
     <div id="container">
     <div id="controls">
-      <select id="accident-selector">
-      </select>
+      <div class="control-group">
+        <select id="accident-selector">
+        </select>
 
-      <select id="vehicle-selector">
-      </select>
+        <select id="vehicle-selector">
+        </select>
 
-      <input id="animator-toggle" type="checkbox">animate</input>
-      hour of day:<input id="hour-selector" type="range" min="0" max="11" step="1">
-      day of week:<input id="day-selector" type="range" min="0" max="6" step="1">
-      month of year:<input id="month-selector" type="range" min="0" max="11" step="1"> 
+        <div id="state">
+          <div id="displayed-hour"></div>
+          <div id="displayed-day"></div>
+          <div id="displayed-month"></div>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="control">
+          <input id="animator-toggle" type="checkbox">animate</input>
+        </div>
+        <div class="control">
+          <div class="label">hour:</div>
+          <input id="hour-selector" type="range" min="0" max="11" step="1">
+        </div>
+        <div class="control">
+          <div class="label">day:</div>
+          <input id="day-selector" type="range" min="0" max="6" step="1">
+        </div>
+        <div class="control">
+          <div class="label">month:</div>
+          <input id="month-selector" type="range" min="0" max="11" step="1">
+        </div>
+      </div>
 
     </div>
 
@@ -24,18 +45,6 @@
       </canvas>
     </div>
 
-    <div id="days">
-      <ul id="days-ul">
-        <li id="0">Monday</li>
-        <li id="1">Tuesday</li>
-        <li id="2">Wednesday</li>
-        <li id="3">Thursday</li>
-        <li id="4">Friday</li>
-        <li id="5">Saturday</li>
-        <li id="6">Sunday</li>
-      </ul>
-    </div>
-    </div>
 
     <img style="display:none" id="map-background" src="images/map.jpg">
 
