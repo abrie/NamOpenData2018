@@ -84,6 +84,27 @@ body {
   width: 450px;
 }
 
+#scale-container {
+  position: relative;
+  left: -80px;
+  top: -30px;
+  display: flex;
+  flex-direction: column;
+}
+
+#scale div.low-risk-scale-label {
+  color: black;
+  width: 100%;
+  font-variant: small-caps;
+  text-align: center;
+}
+
+#scale div.high-risk-scale-label {
+  color: white;
+  width: 100%;
+  font-variant: small-caps;
+}
+
 #scale {
   background: linear-gradient(white, black);
   height: 300px;
@@ -91,7 +112,8 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-content: space-between;
+  align-content: space-around;
+  border: 1px solid lightgrey;
 }
 
 #days {
