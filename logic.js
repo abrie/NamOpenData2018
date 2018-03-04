@@ -163,11 +163,15 @@ function updateState() {
 
   recompute();
 
-  if (state.animatorRunning === true && state.frameRequest === undefined) {
-    requestFrame();
-  } else if (state.frameRequest !== undefined) {
-    window.cancelAnimationFrame(state.frameRequest);
-    state.frameRequest = undefined;
+  if (state.animatorRunning === true) {
+    if (state.frameRequest === undefined) {
+      requestFrame();
+    }
+  } else {
+    if (state.frameRequest !== undefined) {
+      window.cancelAnimationFrame(state.frameRequest);
+      state.frameRequest = undefined;
+    }
   }
 }
 
