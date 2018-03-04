@@ -69,6 +69,12 @@ function drawState() {
   const hourElement = document.getElementById("displayed-hour");
   hourElement.innerHTML = `${hourLabel}`;
 
+  const dayElement = document.getElementById("displayed-day");
+  dayElement.innerHTML = `${dayLabel}`;
+
+  const monthElement = document.getElementById("displayed-month");
+  monthElement.innerHTML = `${monthLabel}`;
+
 }
 
 function drawMap(region) {
