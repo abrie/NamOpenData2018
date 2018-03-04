@@ -26,10 +26,26 @@ body {
 }
 
 #title {
-  font-size: 2em;
+  display: flex;
+  flex-direction: row;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+#title div.flag {
+  margin-right: 1em;
+  flex: 1 1 10%;
+}
+
+#title div.text {
+  position: relative;
+  top: -5px;
+  font-size: 2.3em;
+  flex: 1 1 90%;
 }
 
 #state {
+  cursor: default;
   flex: 1 1 100%;
   margin: 0.25em;
   display: flex;
