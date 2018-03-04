@@ -1,5 +1,5 @@
 body {
-  border-box: border;
+  box-sizing: border-box;
 }
 
 #displayed-hour {
@@ -21,13 +21,17 @@ body {
 
 #container {
   display: flex;
-  flex-flow: column;
+  flex-direction: column;
   align-items: center;
+}
+
+#title {
+  font-size: 2em;
 }
 
 #state {
   display: flex;
-  flex-flow: row;
+  flex-direction: row;
   border: 1px solid black;
 }
 
@@ -47,11 +51,23 @@ body {
 }
 
 #map {
+  display: flex;
   flex: 1 1 50%;
+  align-items: flex-end;
 }
 
 #map canvas {
-  width: 500px;
+  width: 450px;
+}
+
+#scale {
+  background: linear-gradient(white, black);
+  height: 300px;
+  width: 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-between;
 }
 
 #state {
