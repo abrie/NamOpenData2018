@@ -35,8 +35,11 @@ function recompute() {
 
   let sr = regionTypeScores.map( (score, idx) => scoreFunction(score, idx) ) 
 
-  drawMap();
+  //drawMap();
+  drawRoads();
+  drawTowns();
   drawState();
+  
 
   sr.forEach( (score, idx) => drawRegion(idx, score) );
 }
@@ -81,6 +84,16 @@ function drawMap(region) {
   let background = document.getElementById("map-background");
   context.globalAlpha = 1;
   context.drawImage(background, 0, 0);
+}
+function drawRoads(){
+  const roadImage = document.getElementById("map-roads");
+  context.globalAlpha = 1;
+  context.drawImage(roadImage,0,0);
+}
+function drawTowns(){
+  const townImage = document.getElementById("map-towns");
+  context.globalAlpha = 1;
+  context.drawImage(townImage,0,0);
 }
 
 function drawRegion(idx, alpha) {
