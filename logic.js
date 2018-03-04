@@ -124,9 +124,12 @@ function populateAgeSelector( el ) {
 
 updateState();
 
-// highlights the days of the week
+// highlights the labels based on the inputs
 daySelector.addEventListener("change",changeDay);
+hourSelector.addEventListener("change", changeHour);
+
 var past = 0;
+var hPast = 0;
 
 function changeDay()
 {
@@ -135,4 +138,10 @@ function changeDay()
  document.getElementById(`${past}`).style.color = "black";
  past = daySelector.value;
 }
-//highlights the days of the  week
+
+function changeHour(){
+  document.getElementById("h"+hourSelector.value).style.color = "red";
+  document.getElementById("h"+hPast).style.color = "black";
+ hPast = hourSelector.value;
+}
+//highlights the labels based on the inputs
