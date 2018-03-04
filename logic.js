@@ -13,11 +13,11 @@ var context = canvas.getContext('2d');
 var regionImages = loadImages();
 
 function recompute() {
-  var regionScores = scoreRegionsByDayOfWeek(state.day, 0.25);
+  var regionDayScores = scoreRegionsByDayOfWeek(state.day, 0.25);
   var regionVehicleScores = scoreRegionsByVehicleType(state.vehicle, 0.20);
-  var regionAccidentTypeScores = scoreRegionsByAccidentType(state.accident_type, 0.20);
+  var regionTypeScores = scoreRegionsByAccidentType(state.accident_type, 0.25);
 
-  let scaledHours = scaledCrashesByHour(0.15);
+  let scaledHours = scaledCrashesByHour(0.20);
   let hourScale = scaledHours[state.hour];
 
   let scaledMonths = scaledInjuriesByMonth(0.15);
@@ -29,10 +29,10 @@ function recompute() {
       hourScale + 
       monthScale +
       regionVehicleScores[idx] + 
-      regionAccidentTypeScores[idx])
+      regionDayScores[idx])
   }
 
-  let sr = regionScores.map( (score, idx) => scoreFunction(score, idx) ) 
+  let sr = regionTypeScores.map( (score, idx) => scoreFunction(score, idx) ) 
 
   drawMap();
 
