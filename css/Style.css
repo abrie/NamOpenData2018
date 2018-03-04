@@ -3,7 +3,7 @@ canvas{
     width: 50%;
 }
 
-days {
+#days {
     float: right;
     width: 50%;
     text-decoration: none;
