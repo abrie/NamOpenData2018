@@ -11,7 +11,32 @@ const hour_labels = [
   "18:00 - 19:59",
   "20:00 - 21:59",
   "22:00 - 23:59",
-]
+];
+
+const day_labels = [
+  "sun",
+  "mon",
+  "tue",
+  "wed",
+  "thu",
+  "fri",
+  "sat"
+];
+
+const month_labels = [
+  "jan",
+  "feb",
+  "mar",
+  "apr",
+  "may",
+  "jun",
+  "jul",
+  "aug",
+  "sep",
+  "oct",
+  "nov",
+  "dec",
+];
 
 const csv_agegroup_male_female_unknown_total = [
   "0 to 5,21, 17, 1,39",
