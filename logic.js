@@ -188,19 +188,31 @@ const animatorToggle = document.getElementById("animator-toggle");
 animatorToggle.addEventListener("change", updateState );
 
 const vehicleSelector = document.getElementById("vehicle-selector");
-populateVehicleTypeSelector( vehicleSelector );
+populateVehicleTypeSelector(vehicleSelector, 3);
 vehicleSelector.addEventListener("change", updateState);
 
 const accidentTypeSelector = document.getElementById("accident-selector");
-populateAccidentTypeSelector(accidentTypeSelector);
+populateAccidentTypeSelector(accidentTypeSelector, 5);
 accidentTypeSelector.addEventListener("change", updateState);
 
-function populateVehicleTypeSelector(element) {
-  vehicle_types.forEach( function(str, idx) { element.appendChild(createOption(idx, str)) } );
+function populateVehicleTypeSelector(element, default_idx) {
+  vehicle_types.forEach( function(str, idx) { 
+    let option = createOption(idx, str);
+    if (default_idx === idx) {
+      option.setAttribute("selected","true");
+    }
+    element.appendChild(option) 
+  });
 }
 
-function populateAccidentTypeSelector(element) {
-  accident_types.forEach( function(str, idx) { element.appendChild(createOption(idx, str)) } );
+function populateAccidentTypeSelector(element, default_idx) {
+  accident_types.forEach( function(str, idx) { 
+    let option = createOption(idx, str);
+    if (default_idx === idx) {
+      option.setAttribute("selected","true");
+    }
+    element.appendChild(option) 
+  });
 }
 
 function populateAgeSelector( el ) {

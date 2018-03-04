@@ -6,17 +6,22 @@
   <body>
     <div id="container">
     <div id="title">
-      Regional Traffic Risk Map
+      <div class="flag">
+        <img width="50" src="images/flag.png">
+      </div>
+      <div class="text">
+        Regional Traffic Risk Map
+      </div>
     </div>
     <div id="controls">
       <div class="control-group">
-        <select id="accident-selector">
+        <select id="vehicle-selector" title="Vehicle type">
         </select>
 
-        <select id="vehicle-selector">
+        <select id="accident-selector" title="Crash type" >
         </select>
 
-        <div id="state">
+        <div id="state" title="Date and time of current view">
           <div id="displayed-hour"></div>
           <div id="displayed-day"></div>
           <div id="displayed-month"></div>
@@ -25,19 +30,20 @@
 
       <div class="control-group">
         <div class="control">
-          <input id="animator-toggle" type="checkbox">animate</input>
+          <label for="animate" title="Toggles time animation.">animate</label>
+          <input id="animator-toggle" type="checkbox" title="Toggles time animation." name="animate">
         </div>
         <div class="control">
           <div class="label">hour:</div>
-          <input id="hour-selector" type="range" min="0" max="11" step="1">
+          <input id="hour-selector" type="range" min="0" max="11" step="1" title="Adjust hour">
         </div>
         <div class="control">
           <div class="label">day:</div>
-          <input id="day-selector" type="range" min="0" max="6" step="1">
+          <input id="day-selector" type="range" min="0" max="6" step="1" title="Adjusts weekday">
         </div>
         <div class="control">
           <div class="label">month:</div>
-          <input id="month-selector" type="range" min="0" max="11" step="1">
+          <input id="month-selector" type="range" min="0" max="11" step="1" title="Adjusts month">
         </div>
       </div>
 
@@ -46,9 +52,12 @@
     <div id="map">
       <canvas id="map-canvas" width="600" height="598">
       </canvas>
-      <div id="scale">
-        <div>low</div>
-        <div style="color:white">high</div>
+      <div id="scale-container">
+        <div id="scale" title="Scale of risk in a region">
+          <div class="low-risk-scale-label">low</div>
+          <div class="high-risk-scale-label">high</div>
+        </div>
+        <div>Risk</div>
       </div>
     </div>
 
