@@ -6,9 +6,10 @@ const state = {
   age: undefined,
   vehicle_type: undefined,
   accident_type: undefined,
+  frameRequest: undefined,
 }
 
-var canvas = document.getElementById("map");
+var canvas = document.getElementById("map-canvas");
 var context = canvas.getContext('2d');
 var regionImages = loadImages();
 
@@ -77,14 +78,55 @@ function createOption(idx, str) {
   return el;
 }
 
+var totalElapsed = 0;
+
+function onFrame(elapsed) {
+  let hour = state.hour;
+  let day = state.day;
+  let month = state.month;
+
+  hour+=1;
+  if (hour >= 12) {
+    hour = 0;
+    day += 1;
+    if (day >= 7) {
+      day = 0;
+      month += 1;
+      if (month >= 12) {
+        month = 0;
+      }
+    }
+  }
+
+  hourSelector.value = hour;
+  daySelector.value = day;
+  monthSelector.value = month;
+
+  state.frameRequest = undefined;
+
+  updateState();
+}
+
+function requestFrame() {
+  state.frameRequest = window.requestAnimationFrame(onFrame);
+}
+
 function updateState() {
-  state.hour = hourSelector.value;
-  state.day = daySelector.value;
-  state.month = monthSelector.value;
+  state.animatorRunning = animatorToggle.checked; 
+  state.hour = parseInt(hourSelector.value);
+  state.day = parseInt(daySelector.value);
+  state.month = parseInt(monthSelector.value);
   state.vehicle = parseInt(vehicleSelector.value);
   state.accident_type = parseInt(accidentTypeSelector.value);
 
   recompute();
+
+  if (state.animatorRunning === true && state.frameRequest === undefined) {
+    requestFrame();
+  } else if (state.frameRequest !== undefined) {
+    window.cancelAnimationFrame(state.frameRequest);
+    state.frameRequest = undefined;
+  }
 }
 
 const hourSelector = document.getElementById("hour-selector");
@@ -96,10 +138,12 @@ daySelector.addEventListener("input", updateState );
 const monthSelector = document.getElementById("month-selector");
 monthSelector.addEventListener("input", updateState );
 
+const animatorToggle = document.getElementById("animator-toggle");
+animatorToggle.addEventListener("change", updateState );
+
 const vehicleSelector = document.getElementById("vehicle-selector");
 populateVehicleTypeSelector( vehicleSelector );
 vehicleSelector.addEventListener("change", updateState);
-populateAgeSelector( document.getElementById("age-selector") );
 
 const accidentTypeSelector = document.getElementById("accident-selector");
 populateAccidentTypeSelector(accidentTypeSelector);

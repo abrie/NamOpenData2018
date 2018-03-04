@@ -1,10 +1,29 @@
-canvas{
-    float: left;
-    width: 50%;
+body {
+  border-box: border;
+}
+
+#container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+#controls {
+  flex: 0 0 50px;
+}
+
+#map {
+  flex: 1 1 50%;
+}
+
+#map canvas {
+  width: 500px;
+}
+
+#state {
+  flex: 1 1 100%;
 }
 
 #days {
-    float: right;
-    width: 50%;
     text-decoration: none;
 }

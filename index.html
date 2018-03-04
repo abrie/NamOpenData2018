@@ -4,30 +4,25 @@
     <link rel="stylesheet" href="css/Style.css">
   </head>
   <body>
-    <div>
-
-      <select id="gender-selector">
-        <option name="male">male</option>
-        <option name="female">female</option>
-      </select>
-
+    <div id="container">
+    <div id="controls">
       <select id="accident-selector">
       </select>
 
       <select id="vehicle-selector">
       </select>
 
-      <select id="age-selector">
-      </select>
-
+      <input id="animator-toggle" type="checkbox">animate</input>
       hour of day:<input id="hour-selector" type="range" min="0" max="11" step="1">
       day of week:<input id="day-selector" type="range" min="0" max="6" step="1">
       month of year:<input id="month-selector" type="range" min="0" max="11" step="1"> 
 
     </div>
 
-    <canvas id="map" width="600" height="598">
-    </canvas>
+    <div id="map">
+      <canvas id="map-canvas" width="600" height="600">
+      </canvas>
+    </div>
 
     <div id="days">
       <ul id="days-ul">
@@ -39,6 +34,7 @@
         <li id="5">Saturday</li>
         <li id="6">Sunday</li>
       </ul>
+    </div>
     </div>
 
     <img style="display:none" id="map-background" src="images/map.jpg">
