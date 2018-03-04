@@ -13,14 +13,16 @@ var context = canvas.getContext('2d');
 var regionImages = loadImages();
 
 function recompute() {
-  var regionScores = scoreRegionsByDayOfWeek(state.day);
-  var regionVehicleScores = scoreRegionsByVehicleType(state.vehicle);
-  var regionAccidentTypeScores = scoreRegionsByAccidentType(state.accident_type);
+  var regionScores = scoreRegionsByDayOfWeek(state.day, 1.0);
+  var regionVehicleScores = scoreRegionsByVehicleType(state.vehicle, 1.0);
+  var regionAccidentTypeScores = scoreRegionsByAccidentType(state.accident_type, 1.0);
 
-  let scaledHours = scaledCrashesByHour();
+  console.log(regionScores, regionVehicleScores, regionAccidentTypeScores);
+
+  let scaledHours = scaledCrashesByHour(1.0);
   let hourScale = scaledHours[state.hour] * 0.2;
 
-  let scaledMonths = scaledInjuriesByMonth();
+  let scaledMonths = scaledInjuriesByMonth(1.0);
   let monthScale = scaledMonths[state.month] * 0.4;
 
   function scoreFunction(base, idx) {
