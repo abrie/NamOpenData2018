@@ -2,6 +2,23 @@ body {
   border-box: border;
 }
 
+#displayed-hour {
+  flex: 1 1 33%;
+  font-size: 2em;
+}
+
+#displayed-day {
+  flex: 1 1 33%;
+  font-variant: small-caps;
+  font-size: 1.5em;
+}
+
+#displayed-month {
+  flex: 1 1 33%;
+  font-variant: small-caps;
+  font-size: 1.5em;
+}
+
 #container {
   display: flex;
   flex-flow: column;
@@ -9,6 +26,8 @@ body {
 }
 
 #state {
+  display: flex;
+  flex-flow: row;
   border: 1px solid black;
 }
 
