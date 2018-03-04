@@ -36,6 +36,7 @@ function recompute() {
   let sr = regionTypeScores.map( (score, idx) => scoreFunction(score, idx) ) 
 
   drawMap();
+  drawState();
 
   sr.forEach( (score, idx) => drawRegion(idx, score) );
 }
@@ -57,6 +58,11 @@ function loadImages() {
   regionImages["otjozondjupa"] = document.getElementById("map-otjozondjupa");
 
   return regionImages;
+}
+
+function drawState() {
+  const stateElement = document.getElementById("state");
+  stateElement.innerHTML = state.hour;
 }
 
 function drawMap(region) {

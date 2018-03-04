@@ -6,16 +6,34 @@
   <body>
     <div id="container">
     <div id="controls">
-      <select id="accident-selector">
-      </select>
+      <div class="control-group">
+        <select id="accident-selector">
+        </select>
 
-      <select id="vehicle-selector">
-      </select>
+        <select id="vehicle-selector">
+        </select>
 
-      <input id="animator-toggle" type="checkbox">animate</input>
-      hour of day:<input id="hour-selector" type="range" min="0" max="11" step="1">
-      day of week:<input id="day-selector" type="range" min="0" max="6" step="1">
-      month of year:<input id="month-selector" type="range" min="0" max="11" step="1"> 
+        <div id="state">
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="control">
+          <input id="animator-toggle" type="checkbox">animate</input>
+        </div>
+        <div class="control">
+          <div class="label">hour:</div>
+          <input id="hour-selector" type="range" min="0" max="11" step="1">
+        </div>
+        <div class="control">
+          <div class="label">day:</div>
+          <input id="day-selector" type="range" min="0" max="6" step="1">
+        </div>
+        <div class="control">
+          <div class="label">month:</div>
+          <input id="month-selector" type="range" min="0" max="11" step="1">
+        </div>
+      </div>
 
     </div>
 
