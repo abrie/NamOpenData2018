@@ -36,6 +36,7 @@ function recompute() {
   let sr = regionTypeScores.map( (score, idx) => scoreFunction(score, idx) ) 
 
   //drawMap();
+  clearMap();
   drawRoads();
   drawTowns();
   drawState();
@@ -78,6 +79,10 @@ function drawState() {
   const monthElement = document.getElementById("displayed-month");
   monthElement.innerHTML = `${monthLabel}`;
 
+}
+
+function clearMap() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function drawMap(region) {
