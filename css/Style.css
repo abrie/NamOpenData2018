@@ -30,6 +30,7 @@ body {
 }
 
 #state {
+  margin: 0.25em;
   display: flex;
   flex-direction: row;
   border: 1px solid black;
