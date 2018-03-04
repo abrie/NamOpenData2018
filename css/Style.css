@@ -8,8 +8,23 @@ body {
   align-items: center;
 }
 
+#state {
+  border: 1px solid black;
+}
+
 #controls {
-  flex: 0 0 50px;
+  display: flex;
+  flex: 1 1 100px;
+  flex-flow: row;
+  border: 1px solid black;
+}
+
+#controls div.control-group {
+  flex: 1 1 50%;
+} 
+
+#controls div.control-group div.control div.label {
+  display: inline;
 }
 
 #map {
