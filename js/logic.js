@@ -53,10 +53,16 @@ var canvas = document.getElementById("map-canvas");
 var context = canvas.getContext('2d');
 var regionImages = loadImages();
 
-function recompute() {
+function recompute(base) {
   var regionDayScores = scoreRegionsByDayOfWeek(state.day, 0.25);
-  var regionVehicleScores = scoreRegionsByVehicleType(state.vehicle, 0.20);
-  var regionTypeScores = scoreRegionsByAccidentType(state.accident_type, 0.25);
+
+  var baseScore = undefined;
+  if (state.type_table == 'vehicle') {
+    baseScore = scoreRegionsByVehicleType(state.type_index, 0.50);
+  } else if (state.type_table == 'involved') {
+    baseScore = scoreRegionsByAccidentType(state.type_index, 0.50);
+  }
+
 
   let scaledHours = scaledCrashesByHour(0.20);
   let hourScale = scaledHours[state.hour];
@@ -69,11 +75,10 @@ function recompute() {
       base +
       hourScale + 
       monthScale +
-      regionVehicleScores[idx] + 
       regionDayScores[idx])
   }
 
-  let sr = regionTypeScores.map( (score, idx) => scoreFunction(score, idx) ) 
+  let sr = baseScore.map( (score, idx) => scoreFunction(score, idx) ) 
 
   clearMap();
   drawRoads();
@@ -149,10 +154,10 @@ function drawRegion(idx, alpha) {
   context.drawImage(regionImages[regionName], 0, 0);
 }
 
-function createOption(idx, str) {
+function createOption(idx, table, str) {
   var el = document.createElement("option");
   el.innerHTML = str;
-  el.setAttribute("value", idx);
+  el.setAttribute("value", `${table}-${idx}`);
   return el;
 }
 
@@ -202,8 +207,10 @@ function updateState() {
   state.hour = parseInt(hourSelector.value);
   state.day = parseInt(daySelector.value);
   state.month = parseInt(monthSelector.value);
-  state.vehicle = parseInt(vehicleSelector.value);
-  state.accident_type = parseInt(accidentTypeSelector.value);
+
+  let typeParts = vehicleSelector.value.split("-");
+  state.type_table = typeParts[0];
+  state.type_index = parseInt(typeParts[1]);
 
   recompute();
 
@@ -232,29 +239,20 @@ const animatorToggle = document.getElementById("animator-toggle");
 animatorToggle.addEventListener("change", updateState );
 
 const vehicleSelector = document.getElementById("vehicle-selector");
-populateVehicleTypeSelector(vehicleSelector, 3);
+populateVehicleTypeSelector(vehicleSelector, "vehicle");
+populateInvolvedSelector(vehicleSelector, "involved");
 vehicleSelector.addEventListener("change", updateState);
 
-const accidentTypeSelector = document.getElementById("accident-selector");
-populateAccidentTypeSelector(accidentTypeSelector, 5);
-accidentTypeSelector.addEventListener("change", updateState);
-
-function populateVehicleTypeSelector(element, default_idx) {
+function populateVehicleTypeSelector(element, table) {
   vehicle_types.forEach( function(str, idx) { 
-    let option = createOption(idx, str);
-    if (default_idx === idx) {
-      option.setAttribute("selected","true");
-    }
+    let option = createOption(idx, table, str);
     element.appendChild(option) 
   });
 }
 
-function populateAccidentTypeSelector(element, default_idx) {
+function populateInvolvedSelector(element, table) {
   accident_types.forEach( function(str, idx) { 
-    let option = createOption(idx, str);
-    if (default_idx === idx) {
-      option.setAttribute("selected","true");
-    }
+    let option = createOption(idx, table, str);
     element.appendChild(option) 
   });
 }

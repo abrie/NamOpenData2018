@@ -14,6 +14,23 @@ const regions = [
   "otjozondjupa",
 ]
 
+const region_populations = [
+90536,
+150809,
+79507,
+77421,
+223352,
+342141,
+86856,
+245446,
+71233,
+243166,
+176674,
+181973,
+143903,
+]
+
+
 const number_of_injured_persons_per_month_per_year = 
   [589,417,534,588,628,568,667,592,535,477,411,789,6795];
 
@@ -99,8 +116,15 @@ function normalizeArray(arr, max) {
   return normalized.map( (a) => a * max/largest );
 }
 
+function scaleRegionByPopulation(input, index) {
+  return input.map( (region_array) => {
+    return region_array[index] / region_populations[index];
+  });
+}
+
 function normalizeByRegion(input, index, max_score) {
   const unnormal = input.map( (region_array) => {
+		let scaledByPopulation = region_array[index] / region_populations[index];
     return region_array[index];
   });
 
