@@ -4,25 +4,25 @@ body {
 
 #displayed-hour {
   flex: 1 1 25%;
-  font-size: 1.5em;
+  font-size: 1.25em;
 }
 
 #displayed-day {
   flex: 1 1 25%;
   font-variant: small-caps;
-  font-size: 1.5em;
+  font-size: 1.25em;
 }
 
 #displayed-month {
   flex: 1 1 25%;
   font-variant: small-caps;
-  font-size: 1.5em;
+  font-size: 1.25em;
 }
 
 #displayed-year {
   flex: 1 1 25%;
   font-variant: small-caps;
-  font-size: 1em;
+  font-size: 1.25em;
 }
 
 #container {
@@ -52,11 +52,12 @@ body {
 
 #state {
   cursor: default;
-  flex: 1 1 100%;
+  flex: 1 1 300px;
   margin: 0.25em;
   display: flex;
+  height: 100px;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
   border: 1px solid black;
@@ -70,7 +71,8 @@ body {
 
 #controls {
   display: flex;
-  flex: 1 1 100px;
+  width: 460px;
+  flex: 1 1 auto;
   flex-flow: row;
   border: 1px solid black;
 }

@@ -20,22 +20,11 @@
     <div id="controls">
 
       <div class="control-group">
-        <select id="vehicle-selector" title="Vehicle type">
-        </select>
-
-        <div id="state" title="Date and time of current view">
-          <div id="displayed-hour"></div>
-          <div id="displayed-day"></div>
-          <div id="displayed-month"></div>
-          <div id="displayed-year"></div>
-        </div>
-      </div>
-
-      <div class="control-group">
         <div class="control">
-          <label for="animate" title="Toggles time animation.">animate</label>
-          <input id="animator-toggle" type="checkbox" title="Toggles time animation." name="animate">
+          <select id="vehicle-selector" title="Vehicle type">
+          </select>
         </div>
+
         <div class="control">
           <div class="label">hour:</div>
           <input id="hour-selector" type="range" min="0" max="11" step="1" title="Adjust hour">
@@ -48,7 +37,22 @@
           <div class="label">month:</div>
           <input id="month-selector" type="range" min="0" max="11" step="1" title="Adjusts month">
         </div>
+        <div class="control">
+          <label for="animate" title="Toggles time animation.">animate</label>
+          <input id="animator-toggle" type="checkbox" title="Toggles time animation." name="animate">
+        </div>
       </div>
+
+      <div class="control-group">
+        <div id="state" title="Date and time of current view">
+          <div id="displayed-hour"></div>
+          <div id="displayed-day"></div>
+          <div id="displayed-month"></div>
+          <div id="displayed-year"></div>
+        </div>
+
+      </div>
+
 
     </div>
 
