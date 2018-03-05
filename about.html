@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/Style.css">
+  </head>
+  <body>
+    <h1>About the <a href="https://abrie.github.io/NamOpenData2018">Regional Traffic Risk Map</a></h1>
+    <p>An application developed during the 2018 Namibia Open Data Hackathon.<p>
+    <p>It uses data extracted from <a href="raw/mva_fund_road_crash_and_claims_report_2016.pdf">this PDF</a> provided by the <a href="www.mvafund.com.na">Namibia MVA Fund.</a></p>
+    <p><a href="https://github.com/abrie/NamOpenData2018">Here is the source code</a> to the application.</p>
+    <p>"Cheap High Quality Software" is the name of the development team.</p>
+    <p>These are the team members, in randomized order:</p>
+    <ul id="team-members">
+    </ul>
+  <script>
+
+    let members = [
+      "abrie",
+      ]
+
+    shuffleArray(members);
+    
+    let ul = document.getElementById("team-members");
+    members.forEach( function(member) {
+      let li = buildMemberLi(member);
+      ul.appendChild(li);
+    });
+
+    function buildMemberLi(str) {
+      let li = document.createElement("li");
+      li.innerHTML = str;
+      return li;
+    }
+
+  /**
+   * Randomize array element order in-place.
+   * Using Durstenfeld shuffle algorithm.
+   */
+  function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+  }
+  </script>
+  </body>
+</html>
