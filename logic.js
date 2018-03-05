@@ -9,6 +9,46 @@ const state = {
   frameRequest: undefined,
 }
 
+const hour_labels = [
+  "00:00",
+  "02:00",
+  "04:00",
+  "06:00",
+  "08:00",
+  "10:00",
+  "12:00",
+  "14:00",
+  "16:00",
+  "18:00",
+  "20:00",
+  "22:00",
+];
+
+const day_labels = [
+  "sun",
+  "mon",
+  "tue",
+  "wed",
+  "thu",
+  "fri",
+  "sat"
+];
+
+const month_labels = [
+  "jan",
+  "feb",
+  "mar",
+  "apr",
+  "may",
+  "jun",
+  "jul",
+  "aug",
+  "sep",
+  "oct",
+  "nov",
+  "dec",
+];
+
 var canvas = document.getElementById("map-canvas");
 var context = canvas.getContext('2d');
 var regionImages = loadImages();
