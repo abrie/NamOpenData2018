@@ -67,6 +67,7 @@ function drawState() {
   const hourLabel = hour_labels[state.hour];
   const dayLabel = day_labels[state.day];
   const monthLabel = month_labels[state.month];
+  const yearLabel = "2016";
   
   const hourElement = document.getElementById("displayed-hour");
   hourElement.innerHTML = `${hourLabel}`;
@@ -76,6 +77,9 @@ function drawState() {
 
   const monthElement = document.getElementById("displayed-month");
   monthElement.innerHTML = `${monthLabel}`;
+
+  const yearElement = document.getElementById("displayed-year");
+  yearElement.innerHTML = `${yearLabel}`;
 
 }
 

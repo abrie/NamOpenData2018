@@ -3,20 +3,26 @@ body {
 }
 
 #displayed-hour {
-  flex: 1 1 33%;
-  font-size: 2em;
+  flex: 1 1 25%;
+  font-size: 1.5em;
 }
 
 #displayed-day {
-  flex: 1 1 33%;
+  flex: 1 1 25%;
   font-variant: small-caps;
   font-size: 1.5em;
 }
 
 #displayed-month {
-  flex: 1 1 33%;
+  flex: 1 1 25%;
   font-variant: small-caps;
   font-size: 1.5em;
+}
+
+#displayed-year {
+  flex: 1 1 25%;
+  font-variant: small-caps;
+  font-size: 1em;
 }
 
 #container {
@@ -50,6 +56,9 @@ body {
   margin: 0.25em;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   border: 1px solid black;
 }
 
