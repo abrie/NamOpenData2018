@@ -90,7 +90,6 @@ const vehicle_types = [
   "Truck", 
   "Unknown", 
   "Other", 
-  "Total"
 ];
 
 const vehicle_type_by_region = [
