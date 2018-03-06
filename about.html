@@ -6,7 +6,16 @@
   <body>
     <h1>About the <a href="https://abrie.github.io/NamOpenData2018">Regional Traffic Risk Map</a></h1>
     <p>An application developed during the 2018 Namibia Open Data Hackathon.<p>
-    <p>It uses data extracted from <a href="raw/mva_fund_road_crash_and_claims_report_2016.pdf">this PDF</a> provided by the <a href="www.mvafund.com.na">Namibia MVA Fund.</a></p>
+    <p>It uses data extracted from <a href="raw/mva_fund_road_crash_and_claims_report_2016.pdf">this PDF</a> provided by the <a href="www.mvafund.com.na">Namibia MVA Fund.</a>
+    <ul>
+      <li>Table 2: Crashes per month (2011-2016)</li>
+      <li>Table 5: Types of Vehicles involved in crashes per region (<i>note: "Crash Reason" *table appears mislabled</i>).</li>
+      <li>Table 6: Crashes by day of week per region</li>
+      <li>Table 7: Type of vehicles involved in crashes per region</li>
+      <li>Figure 4: Crashes by time of the day (2015 & 2016)</li>
+    </ul>
+    The extracted data is compiled into a composite "risk" number per region. All the region risks numbers are then normalized according to the largest in the set, scaling them to a value between 0.10 to 0.90. The scaled values are then used to shade the map, with 0.10 being light and 0.90 being dark.  Because time is one of the data features, we are able to animate changes in risk according to time of day, day of week, and month of year.
+    </p>
     <p><a href="https://github.com/abrie/NamOpenData2018">Here is the source code</a> to the application.</p>
     <p>"Cheap High Quality Software" is the name of the development team.</p>
     <p>These are the team members, in randomized order:</p>
